@@ -14,6 +14,24 @@ const displayPhone = phones => {
     // clear phone container cards efore adding new cards
     phoneContainer.textContent = '';
 
+    // display show all button if there are more than 12 phones
+
+    const showAllContainer = document.getElementById('show-all-container');
+
+
+    if (phones.length > 12) {
+        showAllContainer.classList.remove('hidden');
+    }
+    else {
+        showAllContainer.classList.add('hidden');
+    }
+
+
+
+
+    // display only first 12 phones
+    phones = phones.slice(0, 12);
+
 
     phones.forEach(phones => {
         console.log(phones);
@@ -41,16 +59,33 @@ const displayPhone = phones => {
         phoneContainer.appendChild(phoneCard);
     })
 
+    // hide loading spinner
+
+    togolSpinnerLoading(false);
+
 
 }
 
 // hendel search button...
 
 const hendelSearch = () => {
+
     // console.log('search hendel');
     const searchFild = document.getElementById('search-fild');
+    togolSpinnerLoading(true);
     const searchText = searchFild.value;
     console.log(searchText);
     loadPhone(searchText);
 }
+
+const togolSpinnerLoading = (isLoding) => {
+    const lodingSpinner = document.getElementById('spinner-loading');
+    if (isLoding) {
+        lodingSpinner.classList.remove('hidden');
+    }
+    else {
+        lodingSpinner.classList.add('hidden');
+    }
+}
+
 // loadPhone();
